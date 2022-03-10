@@ -221,7 +221,7 @@ function installDependencies()
 		echo "Main Depepencies Successfully Installed"
 	fi
 	sudo apt-get install ffmpeg -y --fix-missing || log_error "Unable to install ffmpeg"
-	sudo pip3 install RPi.GPIO || log_error "Unable to install pip3 packages"
+	sudo python -m pip install RPi.GPIO || log_error "Unable to install pip3 packages"
 	if [ -f "/usr/local/bin/composer" ]; then
 		log_info "Composer already installed!"
 	else
@@ -370,8 +370,8 @@ function downloadMudpiCoreFiles()
 	sudo mv /tmp/mudpi_core $mudpi_dir/core || log_error "Unable to move Mudpi core to $mudpi_dir"
 	sudo chown -R $mudpi_user:$mudpi_user "$mudpi_dir" || log_error "Unable to set permissions in '$mudpi_dir'"
 	sudo chmod g+w $mudpi_dir/core || log_error "Unable to set write permissions in $mudpi_dir"
-	sudo pip3 install -r $mudpi_dir/core/requirements.txt
-	sudo pip3 install $mudpi_dir/core >/dev/null 2>&1 || log_error "Problem installing MudPi core python package"
+	sudo python -m pip install -r $mudpi_dir/core/requirements.txt
+	sudo python -m pip install $mudpi_dir/core >/dev/null 2>&1 || log_error "Problem installing MudPi core python package"
 }
 
 # Fetches latest files from github
